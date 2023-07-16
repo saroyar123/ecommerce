@@ -1,58 +1,97 @@
-const User= require("../model/userModel");
-const emailValidator = require('deep-email-validator')
+const User = require("../model/userModel");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-exports.createUser=async(req,res)=>{
-   const {name,email,passward}=req.body;
+// create user account in database
+exports.createUser = async (req, res) => {
+try {
+  const { name, email, password } = req.body;
 
-
-   if(!name||!email||!passward)
-   {
+  if (!name || !email || !password) {
     return res.status(400).json({
-        success:false,
-        message:"data not found"
-    })
-   }
+      success: false,
+      message: "data not found",
+    });
+  }
 
-   const validEmail=await User.find({email:email})
-   if(validEmail)
-   {
+  const validEmail = await User.findOne({ email: email });
+
+  if (validEmail) {
     return res.status(400).json({
-        success:false,
-        message:"email already use"
-    })
-   }
+      success: false,
+      message: "email already use",
+    });
+  }
 
-   const user=await User.create({
-    name,email,passward
-   })
+  const salt = bcrypt.genSaltSync(10);
+  const hashPassword = bcrypt.hashSync(password, salt);
 
-   res.status(201).json({
-    success:true,
-    user
-   })
+  const user = await User.create({
+    name,
+    email,
+    password: hashPassword,
+  });
+
+  const token = jwt.sign(email, process.env.jwt_secret);
+
+  res.status(201).json({
+    success: true,
+    user,
+    token,
+  });
+} catch (error) {
+  res.status(400).json({
+    success:false,
+    message:error
+})
 }
+};
 
-exports.userLogin=async(req,res)=>{
-  const {email,passward}=req.body;
-  const user=await User.find({email:email})
-  if(!user)
-  {
-   return  res.status(400).json({
-        success:false,
-        message:"user not found"
-    })
+// methods for login the user
+exports.userLogin = async (req, res) => {
+try {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email: email });
+  if (!user) {
+    return res.status(400).json({
+      success: false,
+      message: "user not found",
+    });
   }
 
-  if(user.passward===passward)
-  {
-   return  res.status(400).json({
-        success:false,
-        message:"email does not match"
-    })
+  if (!bcrypt.compareSync(password, user.password)) {
+    return res.status(400).json({
+      success: false,
+      message: "email does not match",
+    });
   }
+
+  const token = jwt.sign(email, process.env.jwt_secret);
 
   res.status(200).json({
-    success:true,
-    user
-  })
+    success: true,
+    user,
+    token,
+  });
+} catch (error) {
+  res.status(400).json({
+    success:false,
+    message:error
+})
 }
+};
+
+exports.getUser = async (req, res) => {
+  try {
+
+    res.status(200).json({
+      success: true,
+      user:req.user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success:false,
+      message:error
+  })
+  }
+};

@@ -9,7 +9,7 @@ const user=mongoose.Schema({
         type:String,
         required:true
     },
-    passward:{
+    password:{
         type:String,
         required:true
     },
