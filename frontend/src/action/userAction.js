@@ -11,7 +11,7 @@ export const registerAction=(name,email,password)=>async(dispatch)=>{
 
         console.log("user api is call");
 
-        const {data}=await axios.post("http://localhost:4000/api/v1/user",{name,email,password});
+        const {data}=await axios.post("https://ecommerce-backend-v820.onrender.com/api/v1/user",{name,email,password});
         Cookies.set("token",data.token,{ expires: 7 })
         console.log(data)
 

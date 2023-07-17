@@ -6,27 +6,16 @@ const User = () => {
   const [data, setData] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
         const cookie = Cookies.get('token');
-        console.log(cookie);
-        const response = await axios.get('http://localhost:4000/api/v1/user', {
+        axios.get('https://ecommerce-backend-v820.onrender.com/api/v1/user', {
           headers: {
             token: cookie,
           },
-        });
-        console.log(cookie);
-        setData(response.data);
+        }).then((response)=>setData(response.data));
         console.log(data)
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
   }, []);
 
-  return <div>{data.user.name}</div>;
+  return <div>user</div>;
 };
 
 export default User;
