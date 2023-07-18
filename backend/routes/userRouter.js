@@ -7,6 +7,6 @@ userRouter.route("/user")
 .post(createUser).get(userAuth,getUser);
 
 userRouter.route("/loginUser")
-.post(userLogin).get(userAuth);
+.post(userLogin)
 
 module.exports=userRouter

@@ -17,6 +17,20 @@ const user=mongoose.Schema({
         type:mongoose.SchemaTypes.ObjectId,
         ref:"review"
     }],
+    address:{
+      city:{
+        type:String
+      },
+      pin:Number,
+      landmark:{
+        type:[mongoose.Schema.Types.Mixed]
+      }
+    },
+    cart:{
+        type:mongoose.SchemaTypes.ObjectId,
+        ref:"cart",
+        default:null
+    },
     ordered:[{
         type:mongoose.SchemaTypes.ObjectId,
         ref:"order"
