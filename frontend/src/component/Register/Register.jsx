@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { registerAction } from '../action/userAction';
+import { registerAction } from '../../action/userAction';
 
 const Register = () => {
     const [name,setName]=useState("");

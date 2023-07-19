@@ -3,7 +3,7 @@ const User=require("../model/userModel")
 
 exports.userAuth=async(req,res,next)=>{
     try {
-        // console.log("hello")
+        console.log("auth call")
         // console.log(req.headers.authorization.split(' ')[1])
         // console.log(req.headers.token)
         const token=req.headers.token||req.headers.authorization.split(' ')[1];
