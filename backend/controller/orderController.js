@@ -23,3 +23,12 @@ exports.createOrder = async (req, res) => {
     });
   }
 };
+
+
+const getOrderDetails=async(req,res)=>{
+  try {
+    const order=await orderModel.findOne({_id:req.user.ordered._id}).populate('')
+  } catch (error) {
+    
+  }
+}

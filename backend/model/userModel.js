@@ -14,7 +14,7 @@ const user=mongoose.Schema({
         required:true
     },
     reviewed:[{
-        type:mongoose.SchemaTypes.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"review"
     }],
     address:{
@@ -27,12 +27,12 @@ const user=mongoose.Schema({
       }
     },
     cart:{
-        type:mongoose.SchemaTypes.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"cart",
         default:null
     },
     ordered:[{
-        type:mongoose.SchemaTypes.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"order"
     }]
 })

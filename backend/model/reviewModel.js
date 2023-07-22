@@ -4,11 +4,11 @@ const review=mongoose.Schema({
     rating:Number,
     comment:String,
     userId:{
-        type:mongoose.SchemaTypes.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
     productId:{
-        type:mongoose.SchemaTypes.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"product"
     }
 })

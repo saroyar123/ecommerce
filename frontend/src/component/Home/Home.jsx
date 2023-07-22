@@ -4,22 +4,24 @@ import Product from '../Product/Product'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProductAction } from '../../action/productAction'
 import Loading from '../Loading/Loading'
+import { getUserAction } from '../../action/userAction'
 
-const Home = () => {
+const Home =() => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProductAction());
+    dispatch(getUserAction())
   }, [getAllProductAction, dispatch])
 
   const { loading, data } = useSelector((state) => state.product);
   console.log(data)
   return (
     <>
-      <div><Navbar /></div>
       <div>
         {loading ? <Loading /> : data ? data.products.map((product) => {
         return  <Product
          key={product._id}
+         id={product._id}
          name={product.name}
          description={product.description}
          />

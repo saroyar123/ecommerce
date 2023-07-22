@@ -38,9 +38,11 @@ exports.addProductInCart = async (req, res) => {
     }
     
     await cart.save();
+
+    const Cart=await cartModel.find({}).populate("products");
     res.status(200).json({
       success: true,
-      message: "product added",
+      Cart
     });
   } catch (error) {
     res.status(400).json({
@@ -71,9 +73,10 @@ exports.deleteProductFromCart = async (req, res) => {
     }
     cart.products.splice(productIndex, 1);
     await cart.save();
+    const Cart=await cartModel.find({}).populate({path:'products',select:'_id'});
     res.status(200).json({
       success: true,
-      message: "product delete from cart",
+      Cart
     });
   } catch (error) {
     res.status(400).json({
@@ -82,3 +85,20 @@ exports.deleteProductFromCart = async (req, res) => {
     });
   }
 };
+
+
+exports.cartsDetails=async(req,res)=>{
+  try {
+    const cart=await cartModel.findOne({_id:req.user.cart._id}).populate({path:"products",populate:{path:"productId"}});
+    console.log(cart)
+    res.status(200).json({
+      success:true,
+      cart
+    })
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}

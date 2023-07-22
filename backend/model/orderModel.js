@@ -2,15 +2,15 @@ const { default: mongoose } = require("mongoose");
 
 const order = mongoose.Schema({
   userId: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
   cartId: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "cart",
   },
   paymentId: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref:"payment"
   },
   totalOrderedProduct: Number,
