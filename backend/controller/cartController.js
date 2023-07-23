@@ -1,4 +1,6 @@
+const { model } = require("mongoose");
 const cartModel = require("../model/cart");
+
 exports.createCart = async (req, res) => {
   try {
     const cart = await cartModel.create({});
@@ -8,6 +10,7 @@ exports.createCart = async (req, res) => {
       success: true,
       cart,
     });
+    console.log("working 3");
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -25,24 +28,27 @@ exports.addProductInCart = async (req, res) => {
     // find the cart from the cart collection
     const cart = await cartModel.findOne({ _id: req.user.cart._id });
 
-    // find the product present in cart 
-    const cartProtuct=cart.products.find((product)=>product._id==productId);
+    // find the product present in cart
+    const cartProtuct = cart.products.find(
+      (product) => product._id == productId
+    );
 
     // console.log(cartProtuct)
-    if(cartProtuct)
-    {
-        cartProtuct.quantity+=1;
+    if (cartProtuct) {
+      cartProtuct.quantity += 1;
+    } else {
+      cart.products.push(productId);
     }
-    else{
-        cart.products.push(productId);
-    }
-    
+
     await cart.save();
 
-    const Cart=await cartModel.find({}).populate("products");
+    const Cart = await cartModel
+      .find({})
+      .populate({ path: "products._id", model: "product" })
+      .exec();
     res.status(200).json({
       success: true,
-      Cart
+      Cart,
     });
   } catch (error) {
     res.status(400).json({
@@ -60,23 +66,27 @@ exports.deleteProductFromCart = async (req, res) => {
     // find the cart from the cart collection
     const cart = await cartModel.findOne({ _id: req.user.cart._id });
 
-    // find the index of the product from cart's products array  
-    const productIndex = cart.products.findIndex((product)=>product._id==productId);
+    // find the index of the product from cart's products array
+    const productIndex = cart.products.findIndex(
+      (product) => product._id == productId
+    );
 
     // console.log(productIndex)
-    if(productIndex===-1)
-    {
-        return res.status(404).json({
-            success:false,
-            message:"product not found"
-        })
+    if (productIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        message: "product not found",
+      });
     }
     cart.products.splice(productIndex, 1);
     await cart.save();
-    const Cart=await cartModel.find({}).populate({path:'products',select:'_id'});
+    const Cart = await cartModel
+      .find({})
+      .populate({ path: "products._id", model: "product" })
+      .exec();
     res.status(200).json({
       success: true,
-      Cart
+      Cart,
     });
   } catch (error) {
     res.status(400).json({
@@ -86,19 +96,21 @@ exports.deleteProductFromCart = async (req, res) => {
   }
 };
 
-
-exports.cartsDetails=async(req,res)=>{
+exports.cartsDetails = async (req, res) => {
   try {
-    const cart=await cartModel.findOne({_id:req.user.cart._id}).populate({path:"products",populate:{path:"productId"}});
-    console.log(cart)
+    const cart = await cartModel
+      .findOne({ _id: req.user.cart._id })
+      .populate({ path: "products._id", model: "product" })
+      .exec();
+    console.log(cart);
     res.status(200).json({
-      success:true,
-      cart
-    })
+      success: true,
+      cart,
+    });
   } catch (error) {
     res.status(400).json({
       success: false,
       message: error.message,
     });
   }
-}
+};

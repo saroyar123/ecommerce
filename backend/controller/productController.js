@@ -39,12 +39,14 @@ exports.getAllProducts=async(req,res)=>{
 
 exports.getProduct=async(req,res)=>{
     try {
+
         const productId=req.params.id
         const product=await productModel.findOne({_id:productId});
         res.status(200).json({
             success:true,
             product
         })
+        console.log("get product call")
     } catch (error) {
         res.status(400).json({
             success:false,

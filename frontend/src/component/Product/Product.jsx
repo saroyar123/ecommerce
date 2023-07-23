@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProductAction } from '../../action/productAction';
-import axios from 'axios';
 import { addToCartAction, createCartAction } from '../../action/cartAction';
 
 const Product = ({id,name, description }) => {
   const dispatch=useDispatch();
   const {data}=useSelector((state)=>state.user)
-  const cartSubmitHandler = async () => {
+
+  const cartSubmitHandler = async (e) => {
+    e.preventDefault();
     if(data.user.cart==null)
     {
       await dispatch(createCartAction());

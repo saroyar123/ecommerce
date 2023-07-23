@@ -34,7 +34,7 @@ const user=mongoose.Schema({
     ordered:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"order"
-    }]
+    },]
 })
 
 module.exports=mongoose.model("User",user)

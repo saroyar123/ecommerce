@@ -3,29 +3,29 @@ import Cookies from "js-cookie";
 
 export const createCartAction=()=>async(dispatch)=>{
     try {
-
+        console.log("create cart call");
         dispatch({
-            type:"careateCartRequest"
+            type:"createCartRequest"
         })
-
-        console.log("cart api is call");
         const cookie=Cookies.get("token")
         
-        const {data}=await axios.get("http://localhost:4000/api/v1/cart",{
+        const {data}=await axios.post("http://localhost:4000/api/v1/cart",{},{
             headers:{
                 token:cookie
             }
         });
+        console.log(data)
 
         dispatch({
-            type:"careateCartSuccess",
+            type:"createCartSuccess",
             playload:data
         })
-        console.log("call2");
+        console.log("create cart call");
         
     } catch (error) {
+        console.log(error.message)
         dispatch({
-            type: "careateCartFailure",
+            type: "createCartFailure",
             playload: error.response.data,
           });
     }
@@ -37,8 +37,6 @@ try {
     dispatch({
         type:"addToCartRequest"
     })
-
-    console.log("cart api is call");
     const cookie=Cookies.get("token")
     
     const {data}=await axios.get(`http://localhost:4000/api/v1/cart/add/${id}`,{
@@ -51,7 +49,7 @@ try {
         type:"addToCartSuccess",
         playload:data
     })
-    console.log("call2");
+    console.log("add to cart call");
 } catch (error) {
     dispatch({
         type: "addToCartFailure",

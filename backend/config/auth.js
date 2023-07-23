@@ -3,7 +3,7 @@ const User = require("../model/userModel");
 
 exports.userAuth = async (req, res, next) => {
   try {
-    console.log("auth call");
+    
     // console.log(req.headers.authorization.split(' ')[1])
     // console.log(req.headers.token)
     const token = req.headers.token || req.headers.authorization.split(" ")[1];
@@ -12,15 +12,16 @@ exports.userAuth = async (req, res, next) => {
     const user = await User.findOne({ email: email })
     .populate({
         path: "cart",
-        populate: { path: "products", populate: { path: "productId" } },
-      })
-      .populate("ordered");
+        populate: { path: "products._id",model:"product"} },
+      )
+      .populate("ordered").exec();
 
-      console.log(user)
+      // console.log(user)
     if (!user) {
       throw Error("login first");
     }
     req.user = user;
+    console.log("auth call complete");
     next();
   } catch (error) {
     res.status(400).json({

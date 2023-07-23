@@ -5,16 +5,16 @@ export const cart=createReducer({
     data:null
 },
 {
-    careateCartRequest:(state)=>{
+    createCartRequest:(state)=>{
         state.loading=true
     },
 
-    careateCartcartSuccess:(state,action)=>{
+    createCartSuccess:(state,action)=>{
         state.loading=false
         state.data=action.playload
     },
 
-    careateCartFailure:(state,action)=>{
+    createCartFailure:(state,action)=>{
         state.loading=false
         state.data=action.playload
     },
