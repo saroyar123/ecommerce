@@ -2,14 +2,16 @@ const orderModel = require("../model/orderModel");
 
 exports.createOrder = async (req, res) => {
   try {
-    const { cartId } = req.body;
+    const { cartId,paymentId } = req.body;
 
     const order = await orderModel.create({
       userId: req.user._id,
       cartId,
+      paymentId
     });
 
     req.user.ordered.push(order._id);
+    req.user.cartId=null;
     await req.user.save();
 
     res.status(201).json({

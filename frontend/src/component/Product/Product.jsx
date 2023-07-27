@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCartAction, createCartAction } from '../../action/cartAction';
+import { getUserAction } from '../../action/userAction';
 
 const Product = ({id,name, description }) => {
   const dispatch=useDispatch();
@@ -11,10 +12,12 @@ const Product = ({id,name, description }) => {
     if(data.user.cart==null)
     {
       await dispatch(createCartAction());
-      dispatch(addToCartAction(id))
+      await dispatch(addToCartAction(id));
+      dispatch(getUserAction());
     }
     else{
-      dispatch(addToCartAction(id))
+      await dispatch(addToCartAction(id));
+      dispatch(getUserAction())
     }
   }
 

@@ -7,12 +7,13 @@ const productRouter = require("./routes/productRouter");
 const reviewRouter = require("./routes/reviewRouter");
 const orderRouter = require("./routes/orderRouter");
 const cartRouter = require("./routes/cartRouter");
+const paymentRouter = require("./routes/paymentRouter");
 const app=express();
 dotenv.config();
 connect();
 app.use(cors());
 app.use(express.json());
-app.use("/api/v1",userRouter,productRouter,reviewRouter,orderRouter,cartRouter);
+app.use("/api/v1",userRouter,productRouter,reviewRouter,orderRouter,cartRouter,paymentRouter);
 
 
 app.get('/',(req,res)=>{

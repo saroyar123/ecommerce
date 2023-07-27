@@ -7,14 +7,8 @@ import Loading from '../Loading/Loading'
 import { getUserAction } from '../../action/userAction'
 
 const Home =() => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllProductAction());
-    dispatch(getUserAction())
-  }, [getAllProductAction, dispatch])
 
   const { loading, data } = useSelector((state) => state.product);
-  console.log(data)
   return (
     <>
       <div>

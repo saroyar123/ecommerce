@@ -10,9 +10,17 @@ import Navbar from './component/Navbar/Navbar'
 import Login from './component/Login/Login'
 import ProductDetails from './component/ProductDetails/ProductDetails'
 import Account from './component/Account/Account'
+import { useDispatch } from 'react-redux'
+import { getAllProductAction } from './action/productAction'
+import { getUserAction } from './action/userAction'
+import { useEffect } from 'react'
 
 function App() {
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllProductAction());
+    dispatch(getUserAction())
+  }, [getAllProductAction, dispatch,getUserAction])
   return (
     <BrowserRouter>
       <Routes>

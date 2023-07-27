@@ -1,6 +1,6 @@
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken")
 
 // create user account in database
 exports.createUser = async (req, res) => {
@@ -85,6 +85,7 @@ exports.userLogin = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
+    console.log(process.env.razorpay_key)
     res.status(200).json({
       success: true,
       user: req.user,

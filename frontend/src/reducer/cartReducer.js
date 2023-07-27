@@ -35,6 +35,22 @@ export const cart=createReducer({
     },
 
 
+
+    deleteFromCartRequest:(state)=>{
+        state.loading=true
+    },
+
+    deleteFromCartSuccess:(state,action)=>{
+        state.loading=false
+        state.data=action.playload
+    },
+
+    deleteFromCartFailure:(state,action)=>{
+        state.loading=false
+        state.data=action.playload
+    },
+
+
     
 
 })

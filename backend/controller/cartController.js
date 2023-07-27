@@ -60,6 +60,7 @@ exports.addProductInCart = async (req, res) => {
 
 exports.deleteProductFromCart = async (req, res) => {
   try {
+    // console.log("call1")
     // id of adding product
     const productId = req.params.id;
 
@@ -71,6 +72,8 @@ exports.deleteProductFromCart = async (req, res) => {
       (product) => product._id == productId
     );
 
+
+    // console.log(typeof(productIndex))
     // console.log(productIndex)
     if (productIndex === -1) {
       return res.status(404).json({
@@ -78,8 +81,18 @@ exports.deleteProductFromCart = async (req, res) => {
         message: "product not found",
       });
     }
-    cart.products.splice(productIndex, 1);
+
+    // console.log(cart.products[productIndex].quantity)
+    if(cart.products[productIndex].quantity>2)
+    {
+      cart.products[productIndex].quantity-=1;
+    }
+    else{
+      cart.products.splice(productIndex, 1);
+    }
+    
     await cart.save();
+    // console.log("call2")
     const Cart = await cartModel
       .find({})
       .populate({ path: "products._id", model: "product" })
@@ -95,6 +108,7 @@ exports.deleteProductFromCart = async (req, res) => {
     });
   }
 };
+
 
 exports.cartsDetails = async (req, res) => {
   try {

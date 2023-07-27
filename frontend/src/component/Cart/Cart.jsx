@@ -1,23 +1,31 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CartProduct from '../CartProduct/CartProduct'
+import OrderButton from '../OrderButton/OrderButton'
 
 const Cart = () => {
   const {data}=useSelector((state)=>state.user)
-  console.log(data.user)
   return (
     <div>
       {
-      data.user.cart?<>
+      data.user&&data.user.cart?<>
       {data.user.cart.products.map((product)=>(
-        <>
-        <h1>{product.quantity}</h1>
-        </>
+        <CartProduct
+        key={product._id._id}
+        id={product._id._id}
+        quantity={product.quantity}
+        name={product._id.name}
+        description={product._id.description}
+        />
       
         
       ))}
       <h1>{data.user.cart.totalItem}</h1>
       <h1>{data.user.cart.status}</h1>
+      <OrderButton
+      text={"Order Now"}
+      amount={2500}
+      />
       </>:<h1>Add some product to Cart</h1>
       }</div>
   )
