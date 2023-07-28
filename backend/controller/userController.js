@@ -5,14 +5,16 @@ const jwt = require("jsonwebtoken")
 // create user account in database
 exports.createUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password,address } = req.body;
+    // console.log(address)
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password||!address) {
       return res.status(400).json({
         success: false,
         message: "data not found",
       });
     }
+
 
     const validEmail = await User.findOne({ email: email });
 
@@ -26,10 +28,13 @@ exports.createUser = async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);
 
+
+    console.log(address)
     const user = await User.create({
       name,
       email,
       password: hashPassword,
+      address
     });
 
     const token = jwt.sign(email, process.env.jwt_secret);
@@ -85,7 +90,7 @@ exports.userLogin = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    console.log(process.env.razorpay_key)
+    // console.log(process.env.razorpay_key)
     res.status(200).json({
       success: true,
       user: req.user,

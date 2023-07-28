@@ -10,22 +10,22 @@ const order = mongoose.Schema({
     ref: "cart",
   },
   paymentId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref:"payment"
+    type: String,
+    required: true,
   },
   totalOrderedProduct: Number,
-  status:{
-  type: String,
-  default:"Pending"
+  status: {
+    type: String,
+    default: "Pending",
   },
-  address:{
-    city:{
-      type:String
+  address: {
+    city: {
+      type: String,
     },
-    pin:Number,
-    landmark:{
-      type:[mongoose.Schema.Types.Mixed]
-    }
+    pin: Number,
+    landmark: {
+      type: [mongoose.Schema.Types.Mixed],
+    },
   },
   orderedDate: {
     type: Date,

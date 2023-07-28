@@ -22,9 +22,7 @@ const user=mongoose.Schema({
         type:String
       },
       pin:Number,
-      landmark:{
-        type:[mongoose.Schema.Types.Mixed]
-      }
+      landmark:String
     },
     cart:{
         type:mongoose.Schema.Types.ObjectId,

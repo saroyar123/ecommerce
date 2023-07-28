@@ -3,32 +3,35 @@ import Cookies from "js-cookie";
 
 const cookie = Cookies.get("token");
 
-export const registerAction = (name, email, password) => async (dispatch) => {
-  try {
-    dispatch({
-      type: "userRegisterRequest",
-    });
+export const registerAction =
+  (name, email, password, city, pin, landmark) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "userRegisterRequest",
+      });
 
-    console.log("user api is call");
+      console.log("user api is call");
 
-    const { data } = await axios.post(
-      "http://localhost:4000/api/v1/user",
-      { name, email, password }
-    );
-    Cookies.set("token", data.token, { expires: 7 });
-    console.log(data);
+      const { data } = await axios.post("http://localhost:4000/api/v1/user", {
+        name,
+        email,
+        password,
+        address: {city,pin,landmark},
+      });
+      Cookies.set("token", data.token, { expires: 7 });
+      console.log(data);
 
-    dispatch({
-      type: "userRegisterSuccess",
-      playload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: "userRegisterFailure",
-      playload: error.response.data,
-    });
-  }
-};
+      dispatch({
+        type: "userRegisterSuccess",
+        playload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "userRegisterFailure",
+        playload: error.response.data,
+      });
+    }
+  };
 
 export const loginAction = (email, password) => async (dispatch) => {
   try {

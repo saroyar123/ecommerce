@@ -1,6 +1,7 @@
 const Razorpay = require("razorpay");
 const Payment = require("../model/paymentModel.js");
 const crypto = require("crypto");
+const paymentModel = require("../model/paymentModel.js");
 
 exports.makePayment = async (req, res) => {
   const razorpay = new Razorpay({
@@ -9,14 +10,14 @@ exports.makePayment = async (req, res) => {
   });
   try {
     const { amount } = req.body;
-    console.log(amount);
+    // console.log(amount);
 
     const order = await razorpay.orders.create({
       amount: Number(amount * 100),
       currency: "INR",
     });
 
-    console.log(order);
+    // console.log(order);
 
     res.status(201).json({
       success: true,

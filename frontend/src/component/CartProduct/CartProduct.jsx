@@ -6,12 +6,14 @@ import { getUserAction } from '../../action/userAction';
 const CartProduct =({id,quantity,name,description}) => {
   const dispatch=useDispatch();
   
-  const deleteFromCartHandler=async()=>{
+  const deleteFromCartHandler=async(e)=>{
+    e.preventDefault();
    await dispatch(deleteFromCartAction(id));
    dispatch(getUserAction());
   }
 
-  const addToCartHandler=async()=>{
+  const addToCartHandler=async(e)=>{
+    e.preventDefault();
   await dispatch(addToCartAction(id));
   dispatch(getUserAction())
 
