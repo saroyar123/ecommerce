@@ -20,8 +20,8 @@ function App() {
   const dispatch = useDispatch();
   const {data}=useSelector((state)=>state.user)
   useEffect(() => {
-    dispatch(getAllProductAction());
     dispatch(getUserAction())
+    dispatch(getAllProductAction());
   }, [getAllProductAction, dispatch,getUserAction])
   return (
     <BrowserRouter>

@@ -14,6 +14,7 @@ const Account = () => {
   {
     navigate('/')
   }
+
   const { user } = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
   console.log(user)
@@ -21,7 +22,7 @@ const Account = () => {
     e.preventDefault();
      Cookies.remove('token')
      
-   dispatch(getUserAction());
+   await dispatch(getUserAction());
   }
 
   return(
