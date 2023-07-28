@@ -10,12 +10,10 @@ import Loading from '../Loading/Loading';
 const Account = () => {
   const navigate=useNavigate();
   const {data}=useSelector((state)=>state.user);
-  useEffect(()=>{
-    if(data.success==false)
-    {
-      navigate('/')
-    }
-  },[data])
+  if(data.success==false)
+  {
+    navigate('/')
+  }
   const { user } = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
   console.log(user)
