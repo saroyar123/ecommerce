@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './CreateProduct.css'
 import { useDispatch } from 'react-redux';
-import { createProductAction } from '../../action/productAction';
+import { createProductAction, getAllProductAction } from '../../action/productAction';
 
 const CreateProduct = () => {
   const navigate = useNavigate();
@@ -32,7 +32,8 @@ const CreateProduct = () => {
 
   const submitHandller=async(e)=>{
     e.preventDefault();
-    dispatch(createProductAction(name,description,price,totalquentity,brand,catagory,avatar))
+   await dispatch(createProductAction(name,description,price,totalquentity,brand,catagory,avatar));
+   dispatch(getAllProductAction())
 
   }
 

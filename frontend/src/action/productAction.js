@@ -10,7 +10,7 @@ export const getAllProductAction = () => async (dispatch) => {
 
     console.log("get all product api is call");
 
-    const { data } = await axios.get("http://localhost:4000/api/v1/product");
+    const { data } = await axios.get("https://ecommerce-backend-v820.onrender.com/api/v1/product");
 
     dispatch({
       type: "allProductSuccess",
@@ -37,7 +37,7 @@ export const createProductAction = (name, description, price, totalQuantity, bra
       console.log("get all product api is call");
 
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/product",
+        "https://ecommerce-backend-v820.onrender.com/api/v1/product",
         {
           name,
           description,
