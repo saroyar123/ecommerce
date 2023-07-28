@@ -10,10 +10,12 @@ import Loading from '../Loading/Loading';
 const Account = () => {
   const navigate=useNavigate();
   const {data}=useSelector((state)=>state.user);
-  if(data.success==false)
-  {
-    navigate('/')
-  }
+  useEffect(()=>{
+    if(data.success==false)
+    {
+      navigate('/')
+    }
+  },[data])
   const { user } = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
   console.log(user)
@@ -22,8 +24,6 @@ const Account = () => {
      Cookies.remove('token')
      
    dispatch(getUserAction());
-      window.location.reload(false);
-
   }
 
   return(
