@@ -1,5 +1,6 @@
 const { model } = require("mongoose");
 const cartModel = require("../model/cart");
+const productModel = require("../model/productModel");
 
 exports.createCart = async (req, res) => {
   try {
@@ -27,6 +28,7 @@ exports.addProductInCart = async (req, res) => {
 
     // find the cart from the cart collection
     const cart = await cartModel.findOne({ _id: req.user.cart._id });
+    const product=await productModel.findOne({_id:productId});
 
     // find the product present in cart
     const cartProtuct = cart.products.find(
@@ -39,6 +41,11 @@ exports.addProductInCart = async (req, res) => {
     } else {
       cart.products.push(productId);
     }
+
+    cart.totalItem+=1;
+
+    console.log(typeof(cart.totalPrice),typeof(product.price))
+    cart.totalPrice+=product.price;
 
     await cart.save();
 
@@ -66,6 +73,7 @@ exports.deleteProductFromCart = async (req, res) => {
 
     // find the cart from the cart collection
     const cart = await cartModel.findOne({ _id: req.user.cart._id });
+    const product=await productModel.findOne({_id:productId});
 
     // find the index of the product from cart's products array
     const productIndex = cart.products.findIndex(
@@ -83,6 +91,7 @@ exports.deleteProductFromCart = async (req, res) => {
     }
 
     // console.log(cart.products[productIndex].quantity)
+
     if(cart.products[productIndex].quantity>2)
     {
       cart.products[productIndex].quantity-=1;
@@ -90,6 +99,9 @@ exports.deleteProductFromCart = async (req, res) => {
     else{
       cart.products.splice(productIndex, 1);
     }
+
+    cart.totalItem-=1;
+    cart.totalPrice-=product.price;
     
     await cart.save();
     // console.log("call2")

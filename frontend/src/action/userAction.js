@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 const cookie = Cookies.get("token");
 
 export const registerAction =
-  (name, email, password, city, pin, landmark) => async (dispatch) => {
+  (name, email, password, city, pin, landmark,avatar) => async (dispatch) => {
     try {
       dispatch({
         type: "userRegisterRequest",
@@ -17,9 +17,10 @@ export const registerAction =
         email,
         password,
         address: {city,pin,landmark},
+        avatar
       });
       Cookies.set("token", data.token, { expires: 7 });
-      console.log(data);
+      // console.log(data);
 
       dispatch({
         type: "userRegisterSuccess",
@@ -46,8 +47,8 @@ export const loginAction = (email, password) => async (dispatch) => {
       { email, password }
     );
     Cookies.set("token", data.token, { expires: 7 });
-    console.log(data);
-    console.log("user api is call");
+    // console.log(data);
+    // console.log("user api is call");
 
     dispatch({
       type: "userLoginSuccess",

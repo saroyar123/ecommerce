@@ -20,6 +20,10 @@ const cartModel=mongoose.Schema({
     status:{
         type:String,
         default:"To be order"
+    },
+    totalPrice:{
+        type:Number,
+        default:0
     }
 })
 

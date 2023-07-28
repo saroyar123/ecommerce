@@ -1,20 +1,27 @@
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const cloudinary=require("cloudinary")
 
 // create user account in database
 exports.createUser = async (req, res) => {
   try {
-    const { name, email, password,address } = req.body;
-    // console.log(address)
+    const { name, email, password, address ,avatar} = req.body;
 
-    if (!name || !email || !password||!address) {
+    // console.log(avatar)
+
+    if (!name || !email || !password || !address||!avatar) {
       return res.status(400).json({
         success: false,
         message: "data not found",
       });
     }
 
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+      folder: "ecommerce_User",
+    });
+
+    // console.log(myCloud)
 
     const validEmail = await User.findOne({ email: email });
 
@@ -28,13 +35,16 @@ exports.createUser = async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);
 
-
-    console.log(address)
+    console.log(address);
     const user = await User.create({
       name,
       email,
       password: hashPassword,
-      address
+      address,
+      avatar:{
+        public_id:myCloud.public_id,
+        url:myCloud.secure_url,
+      }
     });
 
     const token = jwt.sign(email, process.env.jwt_secret);
@@ -56,7 +66,7 @@ exports.createUser = async (req, res) => {
 exports.userLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email,password);
+    console.log(email, password);
     const user = await User.findOne({ email: email });
     if (!user) {
       return res.status(400).json({
@@ -64,7 +74,7 @@ exports.userLogin = async (req, res) => {
         message: "user not found",
       });
     }
-    console.log(user)
+    console.log(user);
 
     if (!bcrypt.compareSync(password, user.password)) {
       return res.status(400).json({

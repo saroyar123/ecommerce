@@ -18,6 +18,7 @@ const Home =() => {
          id={product._id}
          name={product.name}
          description={product.description}
+         avatar={product.avatar}
          />
         }) 
         : <h1>data not found</h1>

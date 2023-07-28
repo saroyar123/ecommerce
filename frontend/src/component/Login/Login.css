@@ -2,3 +2,11 @@
     padding: 10px;
     text-decoration: none;
     }
+    .Form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    
+    }
+    

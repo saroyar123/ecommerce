@@ -17,7 +17,7 @@ const Login = () => {
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className='Form'>
         <input type='email' placeholder='example@gmail.com' value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type='password' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
         <button type='submit'>Login</button>

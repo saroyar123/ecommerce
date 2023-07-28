@@ -24,6 +24,10 @@ const user=mongoose.Schema({
       pin:Number,
       landmark:String
     },
+    avatar:{
+        public_id:String,
+        url:String
+    },
     cart:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"cart",

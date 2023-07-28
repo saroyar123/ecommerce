@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCartAction, createCartAction } from '../../action/cartAction';
 import { getUserAction } from '../../action/userAction';
+import { Avatar } from '@mui/material';
 
-const Product = ({id,name, description }) => {
+const Product = ({id,name, description,avatar }) => {
   const dispatch=useDispatch();
   const {data}=useSelector((state)=>state.user)
 
@@ -26,6 +27,10 @@ const Product = ({id,name, description }) => {
   }
   return (
     <div>
+          <Avatar
+          src={avatar.url}
+          sx={{ height: "8vmax", width: "8vmax" }}
+        />
       <h1>{name}</h1>
       <h3>{description}</h3>
       <div>
