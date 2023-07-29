@@ -46,14 +46,14 @@ const CreateProduct = () => {
           sx={{ height: "10vmax", width: "10vmax" }}
         />
 
-        <input type="file" accept="image/*" onChange={handleImageChange} />
+        <input className='inputClass' type="file" accept="image/*" onChange={handleImageChange} />
 
-        <input type='text' placeholder='name' value={name} onChange={(e) => setName(e.target.value)} />
-        <input type='text' placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
-        <input type='number' placeholder='price' value={price} onChange={(e) => setPrice(e.target.value)} />
-        <input type='number' placeholder='totalquentity' value={totalquentity} onChange={(e) => setTotalquentity(e.target.value)} />
-        <input type='text' placeholder='brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
-        <input type='text' placeholder='catagory' value={catagory} onChange={(e) => setCatagory(e.target.value)} />
+        <input className='inputClass' type='text' placeholder='name' value={name} onChange={(e) => setName(e.target.value)} />
+        <input className='inputClass' type='text' placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
+        <input className='inputClass' type='number' placeholder='price' value={price} onChange={(e) => setPrice(e.target.value)} />
+        <input className='inputClass' type='number' placeholder='totalquentity' value={totalquentity} onChange={(e) => setTotalquentity(e.target.value)} />
+        <input className='inputClass' type='text' placeholder='brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
+        <input className='inputClass' type='text' placeholder='catagory' value={catagory} onChange={(e) => setCatagory(e.target.value)} />
         <button type='submit'>Add Product</button>
       </form>
     </div>

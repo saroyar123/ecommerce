@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCartAction, createCartAction } from '../../action/cartAction';
 import { getUserAction } from '../../action/userAction';
-import { Avatar } from '@mui/material';
+import './Product.css'
 
 const Product = ({id,name, description,avatar }) => {
   const dispatch=useDispatch();
@@ -26,19 +26,15 @@ const Product = ({id,name, description,avatar }) => {
    
   }
   return (
-    <div>
-          <Avatar
-          src={avatar.url}
-          sx={{ height: "8vmax", width: "8vmax" }}
-        />
+    <div className='product'>
+      <img src={avatar.url} alt={name} width="200" height="200"/>
       <h1>{name}</h1>
       <h3>{description}</h3>
       <div>
         <button onClick={productDetails}>Details</button>
       <button onClick={cartSubmitHandler} >Add to Cart</button>
       </div>
-      
-    </div>
+      </div>
   );
 };
 

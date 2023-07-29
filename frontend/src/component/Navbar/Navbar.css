@@ -1,7 +1,12 @@
 .Navbar{
     border: solid 1px red;
+    display: flex;
+    justify-content: center;
 }
 .link{
+ /* background-color:rgb(234, 220, 234);  */
 padding: 10px;
+margin: 10px;
+/* border: 1px solid purple; */
 text-decoration: none;
 }

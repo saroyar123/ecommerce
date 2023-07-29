@@ -34,9 +34,9 @@ const OrderButton = ({ text, amount }) => {
         key,
         amount: order.amount,
         currency: "INR",
-        name: "6 Pack Programmer",
+        name: "Payment",
         description: "ecommerce website",
-        image: "https://avatars.githubusercontent.com/u/25058652?v=4",
+        image: "https://res.cloudinary.com/dwcarlfhd/image/upload/v1690605565/profile_2_lr6rt2.jpg",
         order_id: order.id,
         callback_url: "http://localhost:4000/api/v1/verification",
         prefill: {

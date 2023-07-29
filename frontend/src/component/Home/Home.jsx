@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react'
-import Navbar from '../Navbar/Navbar'
 import Product from '../Product/Product'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProductAction } from '../../action/productAction'
 import Loading from '../Loading/Loading'
-import { getUserAction } from '../../action/userAction'
+import './Home.css'
 
 const Home =() => {
 
   const { loading, data } = useSelector((state) => state.product);
   return (
     <>
-      <div>
+      <div className='productDisplay'>
         {loading ? <Loading /> : data ? data.products.map((product) => {
         return  <Product
          key={product._id}

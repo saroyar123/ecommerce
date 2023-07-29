@@ -16,7 +16,7 @@ const Navbar = () => {
         {
           data.success ? (
             <>
-              <Link to="/cart" className='link'>
+            <Link to="/cart" className='link'>
                 Cart
               </Link>
               <Link to="/order" className='link'>
@@ -28,6 +28,7 @@ const Navbar = () => {
               <Link to="/createProduct" className='link'>
                 Create Product
               </Link>
+             
             </>)
             : <Link to="/login" className='link'>Login</Link>
         }
