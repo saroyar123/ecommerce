@@ -1,7 +1,8 @@
 .Navbar{
-    border: solid 1px red;
+    border: solid 1px rgb(247, 219, 247);;
     display: flex;
     justify-content: center;
+    background-color: rgb(250, 240, 250);
 }
 .link{
  /* background-color:rgb(234, 220, 234);  */

@@ -16,7 +16,7 @@ const order = mongoose.Schema({
   totalOrderedProduct: Number,
   status: {
     type: String,
-    default: "Pending",
+    default: "Shipping",
   },
   address: {
     city: {

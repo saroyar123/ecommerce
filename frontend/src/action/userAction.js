@@ -12,7 +12,7 @@ export const registerAction =
 
       console.log("user api is call");
 
-      const { data } = await axios.post("https://ecommerce-backend-v820.onrender.com/api/v1/user", {
+      const { data } = await axios.post("http://localhost:4000/api/v1/user", {
         name,
         email,
         password,
@@ -43,7 +43,7 @@ export const loginAction = (email, password) => async (dispatch) => {
     console.log("user api is call");
 
     const { data } = await axios.post(
-      "https://ecommerce-backend-v820.onrender.com/api/v1/loginUser",
+      "http://localhost:4000/api/v1/loginUser",
       { email, password }
     );
     Cookies.set("token", data.token, { expires: 7 });
@@ -70,7 +70,7 @@ export const getUserAction = () => async (dispatch) => {
 
     console.log("user api is call");
 
-    const { data } = await axios.get("https://ecommerce-backend-v820.onrender.com/api/v1/user", {
+    const { data } = await axios.get("http://localhost:4000/api/v1/user", {
       headers: {
         token: cookie,
       },

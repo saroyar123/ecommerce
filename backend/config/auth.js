@@ -3,20 +3,26 @@ const User = require("../model/userModel");
 
 exports.userAuth = async (req, res, next) => {
   try {
-    
     // console.log(req.headers.authorization.split(' ')[1])
     // console.log(req.headers.token)
     const token = req.headers.token || req.headers.authorization.split(" ")[1];
     const email = jwt.verify(token, "saroyarhossain");
 
     const user = await User.findOne({ email: email })
-    .populate({
+      .populate({
         path: "cart",
-        populate: { path: "products._id",model:"product"} },
-      )
-      .populate("ordered").exec();
+        populate: { path: "products._id", model: "product" },
+      })
+      .populate({
+        path: "ordered",
+        populate: {
+          path: "cartId",
+          populate: { path: "products._id", model: "product" },
+        },
+      })
+      .exec();
 
-      // console.log(user)
+    // console.log(user)
     if (!user) {
       throw Error("login first");
     }

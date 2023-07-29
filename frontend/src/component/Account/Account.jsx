@@ -20,9 +20,9 @@ const Account = () => {
   console.log(user)
   const logOuthandller = async(e) => {
     e.preventDefault();
-     Cookies.remove('token')
-     
-   await dispatch(getUserAction());
+    await Cookies.remove('token')
+    await dispatch(getUserAction());
+    window.location.reload(false);
   }
 
   return(

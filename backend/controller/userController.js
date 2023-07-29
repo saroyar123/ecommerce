@@ -1,16 +1,17 @@
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const cloudinary=require("cloudinary")
+const cloudinary = require("cloudinary");
+const userModel = require("../model/userModel");
 
 // create user account in database
 exports.createUser = async (req, res) => {
   try {
-    const { name, email, password, address ,avatar} = req.body;
+    const { name, email, password, address, avatar } = req.body;
 
     // console.log(avatar)
 
-    if (!name || !email || !password || !address||!avatar) {
+    if (!name || !email || !password || !address || !avatar) {
       return res.status(400).json({
         success: false,
         message: "data not found",
@@ -41,10 +42,10 @@ exports.createUser = async (req, res) => {
       email,
       password: hashPassword,
       address,
-      avatar:{
-        public_id:myCloud.public_id,
-        url:myCloud.secure_url,
-      }
+      avatar: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
     });
 
     const token = jwt.sign(email, process.env.jwt_secret);
@@ -67,7 +68,19 @@ exports.userLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log(email, password);
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email })
+      .populate({
+        path: "cart",
+        populate: { path: "products._id", model: "product" },
+      })
+      .populate({
+        path: "ordered",
+        populate: {
+          path: "cartId",
+          populate: { path: "products._id", model: "product" },
+        },
+      })
+      .exec();
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -101,6 +114,7 @@ exports.userLogin = async (req, res) => {
 exports.getUser = async (req, res) => {
   try {
     // console.log(process.env.razorpay_key)
+    // console.log(req.user._id)
     res.status(200).json({
       success: true,
       user: req.user,

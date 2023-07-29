@@ -1,0 +1,12 @@
+.orderItems{
+    border: 1 solid red;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: antiquewhite;
+}
+img{
+    border-radius: 50%;
+}

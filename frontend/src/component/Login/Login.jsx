@@ -13,9 +13,10 @@ const Login = () => {
   const {data}=useSelector((state)=>state.user)
   const submitHandler = async (e) => {
     e.preventDefault();
-     dispatch(loginAction(email,password));
-    navigate('/')
-
+     dispatch(loginAction(email,password))
+     navigate('/')
+     
+    
   }
 
   return (

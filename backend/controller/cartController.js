@@ -40,12 +40,12 @@ exports.addProductInCart = async (req, res) => {
       cartProtuct.quantity += 1;
     } else {
       cart.products.push(productId);
+
     }
-
     cart.totalItem+=1;
-
-    console.log(typeof(cart.totalPrice),typeof(product.price))
     cart.totalPrice+=product.price;
+
+    
 
     await cart.save();
 
@@ -92,7 +92,7 @@ exports.deleteProductFromCart = async (req, res) => {
 
     // console.log(cart.products[productIndex].quantity)
 
-    if(cart.products[productIndex].quantity>2)
+    if(cart.products[productIndex].quantity>1)
     {
       cart.products[productIndex].quantity-=1;
     }
