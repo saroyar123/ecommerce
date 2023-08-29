@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import './loading.css';
 
 const Loading = () => {
   return (
-    <div>Loading</div>
-  )
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+    </div>
+  );
 }
 
-export default Loading
+export default Loading;

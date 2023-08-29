@@ -2,6 +2,7 @@ const Razorpay = require("razorpay");
 const Payment = require("../model/paymentModel.js");
 const crypto = require("crypto");
 const paymentModel = require("../model/paymentModel.js");
+const orderModel = require("../model/orderModel.js");
 
 exports.makePayment = async (req, res) => {
   const razorpay = new Razorpay({
@@ -32,52 +33,36 @@ exports.makePayment = async (req, res) => {
 };
 
 exports.paymentVerification = async (req, res) => {
-  console.log("call",req.body)
-  res.redirect(
-    `http://127.0.0.1:5173/order`
-  )
-  // console.log("call");
-  // try {
-  //   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-  //     req.body;
+  try {
+    const {  } =
+      req.body;
 
-  //   console.log(req.body);
+    await Payment.create({
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+    });
 
-  //   const body = razorpay_order_id + "|" + razorpay_payment_id;
+    const order = await orderModel.create({
+      userId: req.user._id,
+      cartId,
+      paymentId: payment._id,
+    });
 
-  //   const expectedSignature = crypto
-  //     .createHmac("sha256", process.env.RAZORPAY_APT_SECRET)
-  //     .update(body.toString())
-  //     .digest("hex");
+    req.user.ordered.push(order._id);
+    req.user.cart = null;
+    await req.user.save();
 
-  //   const isAuthentic = expectedSignature === razorpay_signature;
-
-  //   console.log(isAuthentic);
-
-  //   if (isAuthentic) {
-  //     // Database comes here
-
-  //     await Payment.create({
-  //       razorpay_order_id,
-  //       razorpay_payment_id,
-  //       razorpay_signature,
-  //     });
-
-  //     res.redirect(
-  //       `http://localhost:3000/order`
-  //     ).json({
-  //       success:true
-  //     });
-  //   }
-  //   console.log(req.body)
-  // } catch (error) {
-  //   {
-  //     res.status(400).json({
-  //       success: false,
-  //     });
-  //   }
-  // }
-
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    {
+      res.status(400).json({
+        success: false,
+      });
+    }
+  }
 };
 
 exports.getKey = (req, res) => {

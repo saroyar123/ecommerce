@@ -9,7 +9,7 @@ export const createCartAction=()=>async(dispatch)=>{
             type:"createCartRequest"
         })
         // http://localhost:4000
-        const {data}=await axios.post("https://ecommerce-backend-v820.onrender.com/api/v1/cart",{},{
+        const {data}=await axios.post("http://localhost:4000/api/v1/cart",{},{
             headers:{
                 token:cookie
             }
@@ -38,7 +38,7 @@ try {
     })
     
     
-    const {data}=await axios.get(`https://ecommerce-backend-v820.onrender.com/api/v1/cart/add/${id}`,{
+    const {data}=await axios.get(`http://localhost:4000/api/v1/cart/add/${id}`,{
         headers:{
             token:cookie
         }
@@ -65,7 +65,7 @@ export const deleteFromCartAction=(id)=>async(dispatch)=>{
         })
 
         console.log("call",cookie,id)
-        const {data}=await axios.delete(`https://ecommerce-backend-v820.onrender.com/api/v1/cart/delete/${id}`,{
+        const {data}=await axios.delete(`http://localhost:4000/api/v1/cart/delete/${id}`,{
             headers:{
                 token:cookie
             }

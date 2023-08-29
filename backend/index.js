@@ -9,6 +9,7 @@ const reviewRouter = require("./routes/reviewRouter");
 const orderRouter = require("./routes/orderRouter");
 const cartRouter = require("./routes/cartRouter");
 const paymentRouter = require("./routes/paymentRouter");
+const catagoryRouter = require("./routes/catagoryRouter");
 const app=express();
 dotenv.config();
 cloudinary.config(
@@ -21,8 +22,8 @@ cloudinary.config(
 connect();
 app.use(cors());
 app.use(express.json({limit:'50mb'}));
-app.use(express.urlencoded({limit:'50mb',extended:true}));
-app.use("/api/v1",userRouter,productRouter,reviewRouter,orderRouter,cartRouter,paymentRouter);
+app.use(express.urlencoded({extended:true}));
+app.use("/api/v1",userRouter,productRouter,reviewRouter,orderRouter,cartRouter,paymentRouter,catagoryRouter);
 
 
 app.get('/',(req,res)=>{

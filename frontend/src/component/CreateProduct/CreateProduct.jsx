@@ -32,7 +32,7 @@ const CreateProduct = () => {
 
   const submitHandller=async(e)=>{
     e.preventDefault();
-   await dispatch(createProductAction(name,description,price,totalquentity,brand,catagory,avatar));
+   await dispatch(createProductAction(name,description,price,totalquentity,brand,avatar));
    dispatch(getAllProductAction())
 
   }
@@ -53,7 +53,7 @@ const CreateProduct = () => {
         <input className='inputClass' type='number' placeholder='price' value={price} onChange={(e) => setPrice(e.target.value)} />
         <input className='inputClass' type='number' placeholder='totalquentity' value={totalquentity} onChange={(e) => setTotalquentity(e.target.value)} />
         <input className='inputClass' type='text' placeholder='brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
-        <input className='inputClass' type='text' placeholder='catagory' value={catagory} onChange={(e) => setCatagory(e.target.value)} />
+        {/* <input className='inputClass' type='text' placeholder='catagory' value={catagory} onChange={(e) => setCatagory(e.target.value)} /> */}
         <button type='submit'>Add Product</button>
       </form>
     </div>

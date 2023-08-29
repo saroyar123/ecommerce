@@ -20,12 +20,8 @@ const product=mongoose.Schema({
     brand:{
         type:String
     },
-    catagory:{
-     type:String
-    },
     price:Number,
-    totalQuantity:Number,
-    catagory:String
+    totalQuantity:Number
 })
 
 module.exports=mongoose.model("product",product)

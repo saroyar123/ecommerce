@@ -1,5 +1,10 @@
 const mongoose=require("mongoose");
 
+const validateEmail = function(email) {
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return regex.test(email);
+  };
+
 const user=mongoose.Schema({
     name:{
         type:String,
@@ -7,7 +12,8 @@ const user=mongoose.Schema({
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        validate:[validateEmail,"please enter a valid email"]
     },
     password:{
         type:String,
@@ -21,7 +27,7 @@ const user=mongoose.Schema({
       city:{
         type:String
       },
-      pin:Number,
+      pin:String,
       landmark:String
     },
     avatar:{

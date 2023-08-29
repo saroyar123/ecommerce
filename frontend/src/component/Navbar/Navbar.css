@@ -1,13 +1,88 @@
-.Navbar{
-    border: solid 1px rgb(247, 219, 247);;
+/* General styles */
+.wrapper {
     display: flex;
-    justify-content: center;
-    background-color: rgb(250, 240, 250);
-}
-.link{
- /* background-color:rgb(234, 220, 234);  */
-padding: 10px;
-margin: 10px;
-/* border: 1px solid purple; */
-text-decoration: none;
-}
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the content takes up at least the full viewport height */
+  }
+  
+  .navbar-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #333;
+    width: 100%;
+  }
+  
+  .Navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    margin: 0px 200px; /* Remove margin to center-align the content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  }
+  
+  /* Center-align the links */
+  .link-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: x-large;
+  }
+  
+  .link:hover {
+    color: #ff6b6b;
+  }
+  
+  /* Search bar styles */
+  .search-form {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    /* margin-left: auto; */
+  }
+  
+  .search-form input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+  }
+  
+  .search-form button {
+    padding: 10px 20px;
+    background-color: #ff6b6b;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-form button:hover {
+    background-color: #ff5252;
+  }
+  
+  /* Footer styles */
+  .footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Add specific styles for the Outlet content if needed */
+  .content {
+    flex-grow: 1; /* Expands the content to fill available space */
+    padding: 20px;
+  }

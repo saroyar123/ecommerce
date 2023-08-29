@@ -15,9 +15,9 @@ const Order = () => {
       {
         data.user.ordered.map((order)=>(
       <div className='orderItems'>
-        <img src={order.cartId.products[0]._id.avatar.url} width="50" height="50" />
+        {/* <img src={order.cartId.products[0]._id.avatar.url} width="50" height="50" /> */}
         <div>
-        <h3>{order.cartId.products[0]._id.name}&other</h3>
+        {/* <h3>{order.cartId.products[0]._id.name}&other</h3> */}
           <h3>{order.status}</h3>
         </div>
           <button>Details</button>

@@ -1,0 +1,68 @@
+/* CartProduct.css */
+
+/* Container for the entire product */
+.cart-product {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Product name */
+  .product-name {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+    background-color: #b36200;
+  }
+  
+  /* Product description */
+  .product-description {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #666;
+  }
+  
+  /* Quantity controls */
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+  }
+  
+  /* Quantity buttons */
+  .quantity-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 4px;
+    border-radius: 4px;
+    font-size: 18px;
+  }
+  
+  .quantity-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Product quantity display */
+  .product-quantity {
+    font-size: 20px;
+    margin: 0;
+    color: #333;
+  }
+  
+  /* Avatar (if uncommented) */
+  /* .product-avatar {
+    height: 8vmax;
+    width: 8vmax;
+    border-radius: 50%;
+  } */
+  

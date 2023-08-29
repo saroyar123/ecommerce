@@ -10,8 +10,8 @@ const order = mongoose.Schema({
     ref: "cart",
   },
   paymentId: {
-    type: String,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "payment",
   },
   totalOrderedProduct: Number,
   status: {

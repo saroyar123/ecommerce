@@ -27,7 +27,7 @@ const Product = ({id,name, description,avatar }) => {
   }
   return (
     <div className='product'>
-      <img src={avatar.url} alt={name} width="200" height="200"/>
+      {/* <img src={avatar.url} alt={name} width="200" height="200"/> */}
       <h1>{name}</h1>
       <h3>{description}</h3>
       <div>
